@@ -4,6 +4,7 @@ import QtQuick.Controls
 import Quickshell.Hyprland
 import Quickshell.Services.UPower
 import Quickshell.Networking
+import Quickshell.Io
 
 ShellRoot {
   PanelWindow {
@@ -63,6 +64,15 @@ ShellRoot {
         spacing: 16
 
         Text {
+          id: statusText
+          color: "white"
+          font.pixelSize: 14
+
+          text: "▁▁▁▁▁▁▁▁▁▁"
+        }
+
+
+        Text {
           color: "white"
           font.pixelSize: 14
 
@@ -87,6 +97,18 @@ ShellRoot {
             }
 
             return "Battery: " + Math.round(battery.percentage * 100) + "%"
+          }
+        }
+      }
+
+      Process {
+        id: dataProcessor
+        command: [ "./visualizer" ]
+        running: true
+
+        stdout: SplitParser {
+          onRead: (data) => {
+            statusText.text = data.trim()
           }
         }
       }

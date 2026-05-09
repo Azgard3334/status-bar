@@ -1,0 +1,17 @@
+[general]
+autosens = 1
+sensitivity = 100
+bars = 10
+
+[input]
+method = pulse
+source = auto
+
+[output]
+method = raw
+bars = 10
+data_format = ascii
+ascii_max_range = 8
+bar_delimiter = 0
+frame_delimiter = 10
+raw_target = /tmp/cava_fifo
